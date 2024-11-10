@@ -8,6 +8,6 @@ export class Game {
         public madeIn:string,
         public category:Category ,
         public isNew:boolean,
-        public shops?: string[]
+        public shops?: string[],
     ){}
 }
