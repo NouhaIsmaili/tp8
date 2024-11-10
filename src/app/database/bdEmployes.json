@@ -17,6 +17,41 @@
         "poste": "PDG",
         "departement": "Finance"
       }
+    },
+    {
+      "id": "c6f2",
+      "matricule": "jj",
+      "nom": "nouha",
+      "affiliation": "Finance",
+      "diplomes": "Ingénieur"
+    },
+    {
+      "id": "90af",
+      "matricule": "jj",
+      "nom": "nouha",
+      "affiliation": "Finance",
+      "diplomes": "Ingénieur"
+    },
+    {
+      "id": "0d2b",
+      "matricule": "",
+      "nom": 0,
+      "affiliation": "TI",
+      "diplomes": "Secrétaire"
+    },
+    {
+      "id": "1809",
+      "matricule": "bhdhd",
+      "nom": "islem",
+      "affiliation": "TI",
+      "diplomes": "Ingénieur"
+    },
+    {
+      "id": "4caf",
+      "matricule": "bhdhd",
+      "nom": "islem",
+      "affiliation": "TI",
+      "diplomes": "Ingénieur"
     }
   ]
 }

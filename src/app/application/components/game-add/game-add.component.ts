@@ -15,8 +15,9 @@ import { Observable } from 'rxjs';
   styleUrl: './game-add.component.css'
 })
 export class GameAddComponent implements OnInit {
-onAddShop() {
-this.gameShops.push(this.fb.control(''))}
+  onAddShop() {
+    this.gameShops.push(this.fb.control(''))
+  }
   games:Game[] =[];
   readonly fb : FormBuilder=inject(FormBuilder)
   gameService:GameService= inject(GameService)
@@ -39,7 +40,7 @@ this.gameShops.push(this.fb.control(''))}
       isNew:[true],
       shops: this.fb.array([])
     })
-    this.gameForm.get('mane')?.valueChanges.subscribe(
+    this.gameForm.get('name')?.valueChanges.subscribe(
       (value)=>console.log(value)
     )
 
@@ -95,10 +96,6 @@ this.gameShops.push(this.fb.control(''))}
     this.gameForm.get('madeIn')?.setValue(Category.CardGames);
     this.gameShops.clear();
   }
-    
-
-
-
 
 }
 
