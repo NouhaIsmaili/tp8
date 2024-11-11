@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Category } from '../../model/category';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GameService } from '../../services/game.service';
 import { Game } from '../../model/game';
 import { JsonPipe } from '@angular/common';
@@ -15,9 +15,7 @@ import { Observable } from 'rxjs';
   styleUrl: './game-add.component.css'
 })
 export class GameAddComponent implements OnInit {
-  onAddShop() {
-    this.gameShops.push(this.fb.control(''))
-  }
+  
   games:Game[] =[];
   readonly fb : FormBuilder=inject(FormBuilder)
   gameService:GameService= inject(GameService)
@@ -32,9 +30,9 @@ export class GameAddComponent implements OnInit {
 
     console.log(this.games)
     this.gameForm=this.fb.nonNullable.group({
-      id:[null],
-      name:[''],
-      price:[0],
+      id:[1],
+      name:['',[Validators.required, Validators.pattern('[A-Z](.)+')]],
+      price:[0,[Validators.required,Validators.min(0.1)]],
       madeIn:['Tunisie'],
       category:[Category.BoardGames],
       isNew:[true],
@@ -45,11 +43,13 @@ export class GameAddComponent implements OnInit {
     )
 
   }
-
+  
   public get gameShops(){
     return this.gameForm.get('shops') as FormArray;
   }
-
+  onAddShop() {
+        this.gameShops.push(this.fb.control('',Validators.required))
+  }
 
   categories = Object.values(Category); 
   gameForm: FormGroup = new FormGroup({
@@ -97,6 +97,22 @@ export class GameAddComponent implements OnInit {
     this.gameShops.clear();
   }
 
+
+  public get gameName(){
+    return this.gameForm.get('name');
+  }
+
+  public get gemePrice(){
+    return this.gameForm.get('price');
+  }
+
+  public isValidValue(){
+    return this.gameForm.get('price')?.errors?.['min'] && this.gameForm.get('price')?.dirty;
+  }
+
+  public get gameShop(){
+    return this.gameForm.get('shops');
+  }
 }
 
 

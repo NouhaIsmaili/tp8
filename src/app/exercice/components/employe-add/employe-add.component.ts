@@ -1,73 +1,58 @@
-import { Component, inject } from '@angular/core';
+  import { Component, inject, OnInit } from '@angular/core';
 import { EmployeListComponent } from "../employe-list/employe-list.component";
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Employe } from '../../model/employe';
 import { EmployeService } from '../../services/employe.service';
-import { Affiliation } from '../../model/affiliation';
-import { Departement, Poste } from '../../model/types';
+import { Poste } from '../../model/types';
+import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
   selector: 'app-employe-add',
   standalone: true,
-  imports: [EmployeListComponent,ReactiveFormsModule],
+  imports: [EmployeListComponent, ReactiveFormsModule],
   templateUrl: './employe-add.component.html',
   styleUrl: './employe-add.component.css'
 })
-export class EmployeAddComponent {
-  employes:Employe[] =[];
-  posts = Object.values(Poste); 
-  readonly fb : FormBuilder=inject(FormBuilder)
+export class EmployeAddComponent implements OnInit{
 
-  employeService:EmployeService= inject(EmployeService)
-  employeForm: any;
+  fonctions: string[] = Object.values(Poste);
 
-  ngOnInit():void{
+  constructor(private employeService: EmployeService){}
 
-    this.employeService.getEmploye().subscribe(
-      data=>{
-        this.employes=data ;
+  ajoutEmployeForm!:FormGroup;
+  readonly formBuilder : FormBuilder = inject(FormBuilder);
+
+  ngOnInit(): void {
+    this.ajoutEmployeForm = this.formBuilder.nonNullable.group({
+      matricule:['matricule'],
+      name:['name'],
+      departement:["TI"],
+      poste:[Poste.Sec],
+      diplomes: this.formBuilder.array([])
     })
-
-    console.log(this.employes)
-    this.employeForm=this.fb.nonNullable.group({
-      
-      matricule:[''],
-      nom:[0],
-      affiliation:[Departement.IT],
-      diplomes:[Poste.Sec],
-      
-    })
-    this.employeForm.get('nom')?.valueChanges.subscribe(
-      (value: any)=>console.log(value)
-    )
   }
 
-  gameForm: FormGroup = new FormGroup({
-   
-    matricule: new FormControl(),
-    nom: new FormControl(),
-    affiliation: new FormControl(),
-    diplomes: new FormControl(),
- 
-   })
+  public get lesDiplomes() {
+    return this.ajoutEmployeForm.get('diplomes') as FormArray; 
+  } 
 
-   onSubmit() {
-    
-    this.employeService.addEmploye(this.employeForm.value).subscribe(
-      data=>{
-        console.log(data);
-    })
+  addDiplome(){
+    this.lesDiplomes.push(this.formBuilder.control(''));
+  }
 
-    this.employeService.getEmploye().subscribe(data => {
-      this.employes = data;
-    });
+  onSubmit(){
+    this.employeService.addEmploye(this.ajoutEmployeForm.value).subscribe(() => {
+      this.employeService.getEmployes().subscribe(employes => this.employeService.employes = employes);
+    }); 
+  }
 
-    }
+  onReset(){
+    this.ajoutEmployeForm.reset();
+    this.lesDiplomes.clear();
+  }
 
-    onResetForm(){
-      this.employeForm.reset();
-      this.employeForm.get('affiliation')?.setValue(Departement.IT);
-      this.employeForm.get('diplomes')?.setValue(Poste.Sec);
-    }
+  deleteDiplome(index: number){
+    this.lesDiplomes.removeAt(index);
+  }
+
 }

@@ -1,0 +1,38 @@
+<h2> Ajout d'un employé</h2>
+<form [formGroup]="employeForm" >
+    <div>
+        <label> Donnez le matricule</label>
+        <input type="text" formControlName="matricule">
+    </div>
+
+    <div>
+        <label> Donnez le nom</label>
+        <input type="text" formControlName="nom">
+    </div>
+
+    <div class="p-2 bg-light rounded">
+        <strong>Affiliation</strong>
+        <div>
+            <div>
+                <label> Choisissez le département</label>
+                <input type="radio" name="affiliation" value="TI" formControlName="affiliation"> IT
+                <input type="radio" name="affiliation" value="Finance" formControlName="affiliation"> Finance
+            </div>
+            <div>
+                <label> Donnez la fonction</label>
+                <select name="seldiplome" formControlName="diplomes">
+                    @for(p of posts; track $index){
+                        <option [value]="p">{{p}}</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class ="btn btn-dark btn-sm">Ajouter Diplôme</button>
+    <br>
+    <button class="btn btn-primary" (click)="onSubmit()">Ajouter Employé</button>
+    <button class="btn btn-secondary" type="button" (click)="onResetForm()" >Vider</button> 
+</form>
+
+<app-employe-list [tabEmp]="employes"></app-employe-list>

@@ -52,6 +52,20 @@
       "nom": "islem",
       "affiliation": "TI",
       "diplomes": "Ingénieur"
+    },
+    {
+      "id": "4edf",
+      "matricule": "pp",
+      "nom": "88",
+      "affiliation": "TI",
+      "diplomes": "Secrétaire"
+    },
+    {
+      "id": "3c25",
+      "matricule": "pp",
+      "nom": "88",
+      "affiliation": "TI",
+      "diplomes": "Secrétaire"
     }
   ]
 }

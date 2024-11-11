@@ -9,10 +9,27 @@
             <label>Nom</label>
             <input class=" form-select" type="text"  name="name" formControlName="name">
         </div>
+
+        @if(gameName?.invalid && gameName?.dirty){
+            <div class="alert alert-danger">
+                le nom du jeu a un format non valide
+            </div>
+        }
         <div>
             <label>Prix</label>
             <input type="number" class=" form-select" name="price" formControlName="price" >
         </div>
+
+        @if(isValidValue()){
+            <div class="alert alert-danger">
+                le prix doit etre au minimum 0.1 DT
+            </div>
+        }
+        @if(gemePrice?.invalid && gemePrice?.touched){
+            <div class="alert alert-danger">
+                le prix est obligatoire
+            </div>
+        }
 
         <div>
             <label> Made In </label>
@@ -38,7 +55,7 @@
             </label>
         </div>
 
-        <input type="submit"  value="Ajouter" class="btn btn-success">
+        <input type="submit"  value="Ajouter" class="btn btn-success" [disabled]="gameForm.invalid">
         <input type="button" value="Effacer" class="btn btn-danger" (click)="onResetForm()">
 
         <h5>definition de points de vente </h5>
@@ -48,8 +65,14 @@
                     <label>point de vende num: {{indice + 1 }}</label>
                     <input type="text" [formControlName]="indice">
                 </div>
+
             }
         </div>
+        @if(gameShop?.invalid &&gameShop?.touched){
+            <div class="alert alert-danger">
+                shop est un champ obligatoire
+            </div>
+        }
         <button (click)="onAddShop()" type="button" class="btn btn-sm btn-secondary">ajouter un point de vente</button>
     </form>
     {{games|json}}

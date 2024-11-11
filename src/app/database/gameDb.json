@@ -50,7 +50,7 @@
       ]
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "Echecggg",
       "price": 125,
       "madeIn": "Tunisie",
@@ -61,7 +61,7 @@
       ]
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "666",
       "price": 66,
       "madeIn": "Tunisie",
@@ -70,7 +70,7 @@
       "shops": []
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "",
       "price": 0,
       "madeIn": "Tunisie",
@@ -79,7 +79,7 @@
       "shops": []
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "",
       "price": 0,
       "madeIn": "Tunisie",
@@ -88,7 +88,7 @@
       "shops": []
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "",
       "price": 0,
       "madeIn": "Jeux de cartes",
@@ -97,13 +97,35 @@
       "shops": []
     },
     {
-      "id": 11,
+      "id": "11",
       "name": "Echecggg",
       "price": 88,
       "madeIn": "Tunisie",
       "category": "Jeux de société",
       "isNew": true,
       "shops": []
+    },
+    {
+      "id": 12,
+      "name": "Nouha",
+      "price": 3,
+      "madeIn": "Tunisie",
+      "category": "Jeux de société",
+      "isNew": true,
+      "shops": [
+        "tunis"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Nouha",
+      "price": 3,
+      "madeIn": "Tunisie",
+      "category": "Jeux de société",
+      "isNew": true,
+      "shops": [
+        "tunis"
+      ]
     }
   ]
 }
